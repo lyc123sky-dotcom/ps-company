@@ -2,24 +2,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-  --brand-pink: #ff1493;
-  --brand-purple: #b347ff;
-  --brand-cyan: #00dcff;
-  --surface-1: #111111;
-  --surface-2: #1a1a1a;
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --bg-default: #ffffff;
+  --bg-subtle: #f7f7f7;
+  --bg-muted: #ededed;
+  --text-primary: #0a0a0a;
+  --text-secondary: #525252;
+  --text-muted: #888888;
+  --neon-pink: #ff1493;
+  --neon-purple: #b347ff;
+  --accent-cyan: #00dcff;
+  --border-subtle: #ededed;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-brand-pink: var(--brand-pink);
-  --color-brand-purple: var(--brand-purple);
-  --color-brand-cyan: var(--brand-cyan);
-  --color-surface-1: var(--surface-1);
-  --color-surface-2: var(--surface-2);
+  --color-background: var(--bg-default);
+  --color-foreground: var(--text-primary);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-muted: var(--bg-muted);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-neon-pink: var(--neon-pink);
+  --color-neon-purple: var(--neon-purple);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-border-subtle: var(--border-subtle);
   --font-sans:
     Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
     "Malgun Gothic", "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
@@ -27,8 +33,8 @@
 
 html,
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-default);
+  color: var(--text-primary);
   font-family: var(--font-sans);
 }
 
@@ -38,6 +44,6 @@ body {
 }
 
 ::selection {
-  background: var(--brand-pink);
+  background: var(--neon-pink);
   color: #fff;
 }

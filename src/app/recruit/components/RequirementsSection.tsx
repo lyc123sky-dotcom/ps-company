@@ -13,14 +13,30 @@ const niceToHave = [
 
 export default function RequirementsSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-      <div className="text-center mb-14">
-        <h2 className="text-3xl sm:text-4xl font-black tracking-tight">지원 자격</h2>
-        <p className="mt-3 text-white/60">누구에게나 열려있는 기회</p>
-      </div>
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card title="필수 조건" items={mustHave} accent="text-[#ff1493]" border="border-[#ff1493]/30" />
-        <Card title="우대 사항" items={niceToHave} accent="text-[#00dcff]" border="border-[#00dcff]/30" />
+    <section className="bg-[#f7f7f7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0a0a0a]">
+            지원 자격
+          </h2>
+          <p className="mt-3 text-[#525252]">누구에게나 열려있는 기회</p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card
+            title="필수 조건"
+            items={mustHave}
+            accent="text-[#ff1493]"
+            barFrom="from-[#ff1493]"
+            barTo="to-[#b347ff]"
+          />
+          <Card
+            title="우대 사항"
+            items={niceToHave}
+            accent="text-[#b347ff]"
+            barFrom="from-[#b347ff]"
+            barTo="to-[#00dcff]"
+          />
+        </div>
       </div>
     </section>
   );
@@ -30,20 +46,27 @@ function Card({
   title,
   items,
   accent,
-  border,
+  barFrom,
+  barTo,
 }: {
   title: string;
   items: string[];
   accent: string;
-  border: string;
+  barFrom: string;
+  barTo: string;
 }) {
   return (
-    <div className={`p-8 rounded-3xl bg-white/[0.03] border ${border}`}>
+    <div className="relative p-8 rounded-3xl bg-white border border-[#ededed] shadow-[0_2px_8px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div
+        className={`absolute top-0 left-0 h-[3px] w-20 bg-gradient-to-r ${barFrom} ${barTo}`}
+      />
       <h3 className={`text-lg font-bold mb-4 ${accent}`}>{title}</h3>
       <ul className="space-y-3">
         {items.map((item) => (
-          <li key={item} className="flex gap-3 text-white/90">
-            <span className={`shrink-0 mt-1 ${accent}`} aria-hidden>✓</span>
+          <li key={item} className="flex gap-3 text-[#0a0a0a]">
+            <span className={`shrink-0 mt-1 ${accent}`} aria-hidden>
+              ✓
+            </span>
             <span>{item}</span>
           </li>
         ))}

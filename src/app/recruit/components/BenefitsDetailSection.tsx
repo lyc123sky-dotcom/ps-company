@@ -29,33 +29,37 @@ const extras = [
 
 export default function BenefitsDetailSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
-      <div className="text-center mb-14">
-        <h2 className="text-3xl sm:text-4xl font-black tracking-tight">복리후생</h2>
-        <p className="mt-3 text-white/60">크리에이터를 위한 전방위 지원 시스템</p>
-      </div>
-      <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-        {boxes.map((b) => (
-          <div
-            key={b.title}
-            className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/[0.05] to-white/[0.02] border border-white/10 hover:border-[#b347ff]/40 transition"
-          >
-            <div className="text-3xl mb-3" aria-hidden>{b.icon}</div>
-            <h3 className="text-xl font-bold text-white">{b.title}</h3>
-            <p className="mt-2 text-white/70 leading-relaxed">{b.desc}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-10 p-6 rounded-2xl bg-white/[0.03] border border-white/10">
-        <div className="text-sm font-bold text-[#00dcff] mb-3">추가 혜택</div>
-        <ul className="space-y-2 text-white/80">
-          {extras.map((e) => (
-            <li key={e} className="flex gap-2">
-              <span className="text-[#00dcff]" aria-hidden>+</span>
-              <span>{e}</span>
-            </li>
+    <section className="bg-[#f7f7f7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0a0a0a]">
+            복리후생
+          </h2>
+          <p className="mt-3 text-[#525252]">크리에이터를 위한 전방위 지원 시스템</p>
+        </div>
+        <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
+          {boxes.map((b) => (
+            <div
+              key={b.title}
+              className="p-6 sm:p-8 rounded-2xl bg-white border border-[#ededed] hover:border-[#b347ff] hover:shadow-[0_8px_24px_rgba(179,71,255,0.08)] transition"
+            >
+              <div className="text-3xl mb-3" aria-hidden>{b.icon}</div>
+              <h3 className="text-xl font-bold text-[#0a0a0a]">{b.title}</h3>
+              <p className="mt-2 text-[#525252] leading-relaxed">{b.desc}</p>
+            </div>
           ))}
-        </ul>
+        </div>
+        <div className="mt-10 p-6 rounded-2xl bg-white border border-[#ededed]">
+          <div className="text-sm font-bold text-[#b347ff] mb-3">추가 혜택</div>
+          <ul className="space-y-2 text-[#0a0a0a]">
+            {extras.map((e) => (
+              <li key={e} className="flex gap-2">
+                <span className="text-[#ff1493]" aria-hidden>+</span>
+                <span>{e}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

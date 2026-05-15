@@ -26,18 +26,20 @@ export default function RecruitPage() {
       <BenefitsDetailSection />
       <ProcessSection />
       <ContactInfo />
-      <section id="apply" className="scroll-mt-20 py-16 sm:py-24 px-4 sm:px-6">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
-            <span className="bg-gradient-to-r from-[#ff1493] to-[#b347ff] bg-clip-text text-transparent">
-              지원서 작성
-            </span>
-          </h2>
-          <p className="mt-3 text-white/60">
-            아래 양식을 작성해주시면 빠르게 검토 후 연락드립니다.
-          </p>
+      <section id="apply" className="scroll-mt-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0a0a0a]">
+              <span className="bg-gradient-to-r from-[#ff1493] to-[#b347ff] bg-clip-text text-transparent">
+                지원서 작성
+              </span>
+            </h2>
+            <p className="mt-3 text-[#525252]">
+              아래 양식을 작성해주시면 빠르게 검토 후 연락드립니다.
+            </p>
+          </div>
+          <ApplicationForm />
         </div>
-        <ApplicationForm />
       </section>
     </>
   );

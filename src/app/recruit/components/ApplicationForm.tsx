@@ -61,19 +61,21 @@ export default function ApplicationForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-2xl mx-auto p-10 rounded-3xl bg-gradient-to-br from-[#ff1493]/15 via-[#b347ff]/10 to-[#00dcff]/10 border border-white/10 text-center">
+      <div className="max-w-2xl mx-auto p-10 rounded-3xl bg-white border border-[#ededed] text-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
         <div className="text-5xl mb-4" aria-hidden>✨</div>
-        <h3 className="text-2xl font-black text-white">지원이 접수되었습니다</h3>
-        <p className="mt-3 text-white/70">
+        <h3 className="text-2xl font-black text-[#0a0a0a]">
+          지원이 접수되었습니다
+        </h3>
+        <p className="mt-3 text-[#525252]">
           확인 후 영업일 기준 1~3일 내 연락드리겠습니다.
         </p>
-        <p className="mt-1 text-sm text-white/50">
+        <p className="mt-1 text-sm text-[#888888]">
           급한 문의는 010-5295-0074 또는 카카오톡 @lycsky로 연락주세요.
         </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-6 px-5 py-2 text-sm text-white/80 border border-white/20 rounded-full hover:bg-white/10 transition"
+          className="mt-6 px-5 py-2 text-sm text-[#0a0a0a] border border-[#0a0a0a] rounded-full hover:bg-[#0a0a0a] hover:text-white transition"
         >
           새 지원서 작성
         </button>
@@ -85,7 +87,7 @@ export default function ApplicationForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white/[0.03] border border-white/10 space-y-6"
+      className="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white border border-[#ededed] shadow-[0_2px_8px_rgba(0,0,0,0.04)] space-y-6"
     >
       <Row label="이름" required error={errors.name?.message}>
         <input
@@ -171,11 +173,11 @@ export default function ApplicationForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full sm:w-auto px-10 py-4 text-base font-bold text-white rounded-full bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_0_40px_rgba(255,20,147,0.5)] transition-shadow disabled:opacity-60 disabled:cursor-wait"
+          className="w-full sm:w-auto px-10 py-4 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.35)] transition-shadow disabled:opacity-60 disabled:cursor-wait"
         >
           {isPending ? "제출 중..." : "지원서 제출"}
         </button>
-        <p className="mt-3 text-xs text-white/50">
+        <p className="mt-3 text-xs text-[#888888]">
           제출하시면 개인정보 수집 및 이용에 동의한 것으로 간주됩니다. 수집된 정보는 지원 검토 및 연락 목적으로만 사용됩니다.
         </p>
       </div>
@@ -184,7 +186,7 @@ export default function ApplicationForm() {
 }
 
 const inputCls =
-  "w-full px-4 py-3 rounded-xl bg-black/40 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-[#ff1493] focus:ring-2 focus:ring-[#ff1493]/30 transition";
+  "w-full px-4 py-3 rounded-xl bg-white border border-[#ededed] text-[#0a0a0a] placeholder:text-[#aaaaaa] focus:outline-none focus:border-[#ff1493] focus:ring-2 focus:ring-[#ff1493]/20 transition";
 
 function Row({
   label,
@@ -199,12 +201,12 @@ function Row({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-white/90 mb-2">
+      <label className="block text-sm font-semibold text-[#0a0a0a] mb-2">
         {label}
         {required && <span className="ml-1 text-[#ff1493]">*</span>}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-xs text-[#ff6b9d]">{error}</p>}
+      {error && <p className="mt-1.5 text-xs text-[#ff1493]">{error}</p>}
     </div>
   );
 }
@@ -221,14 +223,18 @@ function RadioGroup<T extends string>({
   variant?: "pill" | "card";
 }) {
   return (
-    <div className={variant === "card" ? "grid gap-3 sm:grid-cols-2" : "flex flex-wrap gap-2"}>
+    <div
+      className={
+        variant === "card" ? "grid gap-3 sm:grid-cols-2" : "flex flex-wrap gap-2"
+      }
+    >
       {options.map((opt) => (
         <label
           key={opt.value}
           className={
             variant === "card"
-              ? "relative flex items-center gap-3 px-4 py-4 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/10 transition"
-              : "px-4 py-2 rounded-full bg-black/40 border border-white/10 cursor-pointer hover:border-white/30 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/10 transition text-sm"
+              ? "relative flex items-center gap-3 px-4 py-4 rounded-xl bg-white border border-[#ededed] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition"
+              : "px-4 py-2 rounded-full bg-white border border-[#ededed] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition text-sm"
           }
         >
           <input
@@ -238,9 +244,12 @@ function RadioGroup<T extends string>({
             className="sr-only peer"
           />
           {variant === "card" && (
-            <span className="w-4 h-4 rounded-full border-2 border-white/30 peer-checked:border-[#ff1493] peer-checked:bg-[#ff1493] shrink-0" aria-hidden />
+            <span
+              className="w-4 h-4 rounded-full border-2 border-[#cccccc] peer-checked:border-[#ff1493] peer-checked:bg-[#ff1493] shrink-0"
+              aria-hidden
+            />
           )}
-          <span className="text-white/90">{opt.label}</span>
+          <span className="text-[#0a0a0a]">{opt.label}</span>
         </label>
       ))}
     </div>

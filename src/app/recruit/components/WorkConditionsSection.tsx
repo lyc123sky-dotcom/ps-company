@@ -10,19 +10,31 @@ const conditions = [
 
 export default function WorkConditionsSection() {
   return (
-    <section className="bg-gradient-to-b from-transparent via-white/[0.02] to-transparent py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
         <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight">근무 조건</h2>
-          <p className="mt-3 text-white/60">투명하고 안정적인 근무 환경</p>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0a0a0a]">
+            근무 조건
+          </h2>
+          <p className="mt-3 text-[#525252]">투명하고 안정적인 근무 환경</p>
         </div>
-        <div className="max-w-3xl mx-auto rounded-3xl bg-white/[0.03] border border-white/10 divide-y divide-white/10">
-          {conditions.map((c) => (
-            <div key={c.k} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 px-6 sm:px-8 py-5">
-              <div className="w-28 shrink-0 text-sm font-bold text-[#b347ff]">{c.k}</div>
-              <div className="text-white/90">{c.v}</div>
-            </div>
-          ))}
+        <div className="max-w-3xl mx-auto rounded-3xl border border-[#ededed] overflow-hidden">
+          <div className="px-6 sm:px-8 py-4 bg-[#0a0a0a] text-white text-sm font-bold tracking-wide">
+            CONDITIONS
+          </div>
+          <dl className="bg-white divide-y divide-[#ededed]">
+            {conditions.map((c) => (
+              <div
+                key={c.k}
+                className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 px-6 sm:px-8 py-5"
+              >
+                <dt className="sm:w-28 shrink-0 text-sm font-bold text-[#b347ff]">
+                  {c.k}
+                </dt>
+                <dd className="text-[#0a0a0a]">{c.v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
