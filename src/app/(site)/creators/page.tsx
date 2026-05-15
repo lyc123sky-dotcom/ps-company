@@ -1,3 +1,16 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "크리에이터",
+  description: "PS COMPANY와 함께하는 크리에이터들을 소개합니다. 곧 공개 예정.",
+  alternates: { canonical: "/creators" },
+  openGraph: {
+    url: "/creators",
+    title: "크리에이터 | 피에스컴퍼니",
+    description: "PS COMPANY와 함께하는 크리에이터들을 소개합니다.",
+  },
+};
+
 export default function CreatorsPage() {
   return (
     <section className="bg-white">

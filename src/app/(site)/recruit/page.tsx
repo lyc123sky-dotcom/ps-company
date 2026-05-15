@@ -10,9 +10,16 @@ import ContactInfo from "./components/ContactInfo";
 import ApplicationForm from "./components/ApplicationForm";
 
 export const metadata: Metadata = {
-  title: "BJ 모집 | 피에스컴퍼니",
+  title: "BJ 모집",
   description:
     "월 500~1,000만원, 1일 최소 20만원 보장. 초보 환영. 유튜브 · 치지직 · SOOP · 틱톡 BJ 대규모 모집.",
+  alternates: { canonical: "/recruit" },
+  openGraph: {
+    url: "/recruit",
+    title: "BJ 모집 | 피에스컴퍼니",
+    description:
+      "월 500~1,000만원, 1일 최소 20만원 보장. 초보 환영.",
+  },
 };
 
 export default function RecruitPage() {

@@ -6,9 +6,15 @@ import InquiryForm from "./components/InquiryForm";
 import CompanyInfo from "./components/CompanyInfo";
 
 export const metadata: Metadata = {
-  title: "문의 | 피에스컴퍼니",
+  title: "문의",
   description:
     "제휴 · 협업 · 광고 등 모든 문의를 환영합니다. 전화 · 카카오톡 · 이메일로 빠르게 연락드립니다.",
+  alternates: { canonical: "/contact" },
+  openGraph: {
+    url: "/contact",
+    title: "문의 | 피에스컴퍼니",
+    description: "제휴 · 협업 · 광고 등 모든 문의를 환영합니다.",
+  },
 };
 
 export default function ContactPage() {
