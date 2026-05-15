@@ -1,10 +1,55 @@
-const benefits = [
-  { icon: "💰", title: "월 500~1,000만원", desc: "인센티브 중심 보상 구조" },
-  { icon: "📅", title: "1일 최소 20만원 보장", desc: "방송 출연 시 최저 보장" },
-  { icon: "🎵", title: "춤·노래 무료 레슨", desc: "전문 트레이너 지원" },
-  { icon: "❤️", title: "초보자 환영", desc: "열정만 있다면 OK" },
-  { icon: "🏢", title: "전라도 최대 규모 스튜디오", desc: "프로페셔널 환경" },
-  { icon: "▶️", title: "4대 플랫폼 송출", desc: "유튜브 · 치지직 · SOOP · 틱톡" },
+import {
+  Banknote,
+  CalendarCheck,
+  Music,
+  HeartHandshake,
+  Building2,
+  Radio,
+  type LucideIcon,
+} from "lucide-react";
+
+const benefits: {
+  Icon: LucideIcon;
+  color: string;
+  title: string;
+  desc: string;
+}[] = [
+  {
+    Icon: Banknote,
+    color: "text-[#ff1493]",
+    title: "월 500~1,000만원",
+    desc: "인센티브 중심 보상 구조",
+  },
+  {
+    Icon: CalendarCheck,
+    color: "text-[#b347ff]",
+    title: "1일 최소 20만원 보장",
+    desc: "방송 출연 시 최저 보장",
+  },
+  {
+    Icon: Music,
+    color: "text-[#00dcff]",
+    title: "춤 · 노래 무료 레슨",
+    desc: "전문 트레이너 지원",
+  },
+  {
+    Icon: HeartHandshake,
+    color: "text-[#ff1493]",
+    title: "초보자 환영",
+    desc: "열정만 있다면 OK",
+  },
+  {
+    Icon: Building2,
+    color: "text-[#b347ff]",
+    title: "전라도 최대 규모 스튜디오",
+    desc: "프로페셔널 환경",
+  },
+  {
+    Icon: Radio,
+    color: "text-[#00dcff]",
+    title: "4대 플랫폼 송출",
+    desc: "유튜브 · 치지직 · SOOP · 틱톡",
+  },
 ];
 
 export default function BenefitsGrid() {
@@ -27,7 +72,10 @@ export default function BenefitsGrid() {
               key={b.title}
               className="group p-6 rounded-2xl bg-white border border-[#ededed] hover:border-[#ff1493] hover:shadow-[0_8px_24px_rgba(255,20,147,0.08)] transition"
             >
-              <div className="text-4xl mb-3" aria-hidden>{b.icon}</div>
+              <b.Icon
+                className={`w-10 h-10 mb-3 ${b.color}`}
+                strokeWidth={1.75}
+              />
               <div className="text-lg font-bold text-[#0a0a0a]">{b.title}</div>
               <p className="mt-1 text-sm text-[#525252]">{b.desc}</p>
             </div>

@@ -1,21 +1,30 @@
-const boxes = [
+import {
+  Camera,
+  Handshake,
+  Home,
+  ClipboardCheck,
+  Plus,
+  type LucideIcon,
+} from "lucide-react";
+
+const boxes: { Icon: LucideIcon; title: string; desc: string }[] = [
   {
-    icon: "📷",
+    Icon: Camera,
     title: "고가 장비 지원",
     desc: "최신형 방송 장비 무상 제공. 조명 · 음향 · 카메라 등 프로페셔널 장비 일체.",
   },
   {
-    icon: "🤝",
+    Icon: Handshake,
     title: "1:1 전담 매니지먼트",
     desc: "전담 매니저 배정으로 기획 · 촬영 · 수익화 전 과정 케어.",
   },
   {
-    icon: "🏠",
+    Icon: Home,
     title: "전용 스튜디오 제공",
     desc: "개인 / 크루 전용 스튜디오 완비. 대형 · 소형 엑셀 스튜디오 다수 보유.",
   },
   {
-    icon: "📋",
+    Icon: ClipboardCheck,
     title: "투명 계약 시스템",
     desc: "투명한 계약 · 정산 시스템으로 신뢰 기반 파트너십 구축.",
   },
@@ -43,7 +52,10 @@ export default function BenefitsDetailSection() {
               key={b.title}
               className="p-6 sm:p-8 rounded-2xl bg-white border border-[#ededed] hover:border-[#b347ff] hover:shadow-[0_8px_24px_rgba(179,71,255,0.08)] transition"
             >
-              <div className="text-3xl mb-3" aria-hidden>{b.icon}</div>
+              <b.Icon
+                className="w-9 h-9 mb-3 text-[#b347ff]"
+                strokeWidth={1.75}
+              />
               <h3 className="text-xl font-bold text-[#0a0a0a]">{b.title}</h3>
               <p className="mt-2 text-[#525252] leading-relaxed">{b.desc}</p>
             </div>
@@ -53,8 +65,11 @@ export default function BenefitsDetailSection() {
           <div className="text-sm font-bold text-[#b347ff] mb-3">추가 혜택</div>
           <ul className="space-y-2 text-[#0a0a0a]">
             {extras.map((e) => (
-              <li key={e} className="flex gap-2">
-                <span className="text-[#ff1493]" aria-hidden>+</span>
+              <li key={e} className="flex gap-2 items-start">
+                <Plus
+                  className="w-4 h-4 mt-1 text-[#ff1493] shrink-0"
+                  strokeWidth={2.5}
+                />
                 <span>{e}</span>
               </li>
             ))}

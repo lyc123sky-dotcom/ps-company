@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 const mustHave = [
   "성별 무관 (단, 크루 방송은 여성 게스트 우선)",
   "나이 제한 없음 (열정과 성실함이 있다면 OK)",
@@ -64,9 +66,10 @@ function Card({
       <ul className="space-y-3">
         {items.map((item) => (
           <li key={item} className="flex gap-3 text-[#0a0a0a]">
-            <span className={`shrink-0 mt-1 ${accent}`} aria-hidden>
-              ✓
-            </span>
+            <Check
+              className={`shrink-0 mt-0.5 w-5 h-5 ${accent}`}
+              strokeWidth={2.5}
+            />
             <span>{item}</span>
           </li>
         ))}

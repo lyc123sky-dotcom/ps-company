@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Phone, Mail, MessageCircle } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import StatusBadge from "@/components/admin/StatusBadge";
 import {
@@ -154,25 +155,31 @@ export default async function ApplicationDetailPage({
             <div className="flex flex-col gap-2">
               <a
                 href={`tel:${app.phone}`}
-                className="px-3 py-2 text-sm font-semibold text-center text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
+                className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
               >
-                📞 전화 {app.phone}
+                <Phone className="w-4 h-4 text-[#ff1493]" strokeWidth={2} />
+                전화 {app.phone}
               </a>
               {app.email && (
                 <a
                   href={`mailto:${app.email}`}
-                  className="px-3 py-2 text-sm font-semibold text-center text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
+                  className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
                 >
-                  📧 메일 보내기
+                  <Mail className="w-4 h-4 text-[#00dcff]" strokeWidth={2} />
+                  메일 보내기
                 </a>
               )}
               <a
                 href="https://pf.kakao.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-2 text-sm font-semibold text-center text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
+                className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
               >
-                💬 카카오톡 채널 열기
+                <MessageCircle
+                  className="w-4 h-4 text-[#b347ff]"
+                  strokeWidth={2}
+                />
+                카카오톡 채널 열기
               </a>
             </div>
           </Section>

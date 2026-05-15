@@ -1,8 +1,16 @@
-const steps = [
-  { icon: "📄", title: "서류 접수", desc: "온라인 폼 제출" },
-  { icon: "📞", title: "전화 인터뷰", desc: "간단한 상담 진행" },
-  { icon: "👥", title: "대면 면접", desc: "스튜디오 방문 미팅" },
-  { icon: "🎫", title: "최종 합격", desc: "계약 체결 및 방송 시작" },
+import {
+  FileText,
+  PhoneCall,
+  Users,
+  Ticket,
+  type LucideIcon,
+} from "lucide-react";
+
+const steps: { Icon: LucideIcon; title: string; desc: string }[] = [
+  { Icon: FileText, title: "서류 접수", desc: "온라인 폼 제출" },
+  { Icon: PhoneCall, title: "전화 인터뷰", desc: "간단한 상담 진행" },
+  { Icon: Users, title: "대면 면접", desc: "스튜디오 방문 미팅" },
+  { Icon: Ticket, title: "최종 합격", desc: "계약 체결 및 방송 시작" },
 ];
 
 export default function ProcessSection() {
@@ -19,12 +27,15 @@ export default function ProcessSection() {
           {steps.map((s, i) => (
             <li
               key={s.title}
-              className="relative pt-6 px-6 pb-6 rounded-2xl bg-white border border-[#ededed] text-center"
+              className="relative pt-8 px-6 pb-6 rounded-2xl bg-white border border-[#ededed] text-center"
             >
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-[#ff1493] to-[#b347ff] text-white text-sm font-black flex items-center justify-center shadow-[0_4px_12px_rgba(255,20,147,0.3)]">
                 {i + 1}
               </div>
-              <div className="text-4xl mt-2 mb-3" aria-hidden>{s.icon}</div>
+              <s.Icon
+                className="w-9 h-9 mx-auto mb-3 text-[#0a0a0a]"
+                strokeWidth={1.75}
+              />
               <div className="font-bold text-[#0a0a0a]">{s.title}</div>
               <div className="text-xs text-[#888888] mt-1">{s.desc}</div>
             </li>

@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { MailCheck } from "lucide-react";
 import { contactSchema, type ContactFormValues } from "../schema";
 import { submitInquiry } from "../actions";
 
@@ -38,7 +39,10 @@ export default function InquiryForm() {
   if (submitted) {
     return (
       <div className="max-w-2xl mx-auto p-10 rounded-3xl bg-white border border-[#ededed] text-center shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-        <div className="text-5xl mb-4" aria-hidden>✉️</div>
+        <MailCheck
+          className="w-14 h-14 mx-auto mb-4 text-[#ff1493]"
+          strokeWidth={1.5}
+        />
         <h3 className="text-2xl font-black text-[#0a0a0a]">
           문의가 접수되었습니다
         </h3>

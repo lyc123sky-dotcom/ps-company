@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Phone, Mail } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import StatusBadge from "@/components/admin/StatusBadge";
 import {
@@ -105,17 +106,19 @@ export default async function InquiryDetailPage({
               {mailto && (
                 <a
                   href={mailto}
-                  className="px-3 py-2 text-sm font-semibold text-center text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
+                  className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
                 >
-                  📧 이메일로 회신
+                  <Mail className="w-4 h-4 text-[#00dcff]" strokeWidth={2} />
+                  이메일로 회신
                 </a>
               )}
               {inq.phone && (
                 <a
                   href={`tel:${inq.phone}`}
-                  className="px-3 py-2 text-sm font-semibold text-center text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
+                  className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"
                 >
-                  📞 전화 {inq.phone}
+                  <Phone className="w-4 h-4 text-[#ff1493]" strokeWidth={2} />
+                  전화 {inq.phone}
                 </a>
               )}
             </div>

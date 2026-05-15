@@ -1,20 +1,28 @@
-const channels = [
+import { Phone, MessageCircle, Mail, type LucideIcon } from "lucide-react";
+
+const channels: {
+  Icon: LucideIcon;
+  label: string;
+  value: string;
+  href: string;
+  accent: string;
+}[] = [
   {
-    icon: "📞",
+    Icon: Phone,
     label: "전화",
     value: "010-5295-0074",
     href: "tel:010-5295-0074",
     accent: "text-[#ff1493]",
   },
   {
-    icon: "💬",
+    Icon: MessageCircle,
     label: "카카오톡",
     value: "@lycsky",
     href: "https://pf.kakao.com/",
     accent: "text-[#b347ff]",
   },
   {
-    icon: "📧",
+    Icon: Mail,
     label: "이메일",
     value: "lycsky@naver.com",
     href: "mailto:lycsky@naver.com",
@@ -44,7 +52,10 @@ export default function ContactInfo() {
                 rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-[#ededed] hover:border-[#ff1493] hover:shadow-[0_4px_16px_rgba(255,20,147,0.08)] transition"
               >
-                <div className={`text-3xl ${c.accent}`} aria-hidden>{c.icon}</div>
+                <c.Icon
+                  className={`w-7 h-7 shrink-0 ${c.accent}`}
+                  strokeWidth={1.75}
+                />
                 <div>
                   <div className="text-xs text-[#888888]">{c.label}</div>
                   <div className="text-[#0a0a0a] font-semibold">{c.value}</div>
