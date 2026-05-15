@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import StatusBadge from "@/components/admin/StatusBadge";
+import { KAKAO_CHANNEL_URL } from "@/lib/constants";
 import {
   APPLICATION_STATUSES,
   APPLICATION_STATUS_LABEL,
@@ -170,7 +171,7 @@ export default async function ApplicationDetailPage({
                 </a>
               )}
               <a
-                href="https://pf.kakao.com/"
+                href={KAKAO_CHANNEL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 px-3 py-2 text-sm font-semibold text-[#0a0a0a] border border-[#ededed] rounded-md hover:bg-[#fafafa]"

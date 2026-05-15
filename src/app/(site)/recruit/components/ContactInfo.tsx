@@ -1,4 +1,12 @@
 import { Phone, MessageCircle, Mail, type LucideIcon } from "lucide-react";
+import {
+  KAKAO_CHANNEL_ID,
+  KAKAO_CHANNEL_URL,
+  PHONE_NUMBER,
+  PHONE_TEL_HREF,
+  EMAIL_ADDRESS,
+  EMAIL_MAILTO_HREF,
+} from "@/lib/constants";
 
 const channels: {
   Icon: LucideIcon;
@@ -10,22 +18,22 @@ const channels: {
   {
     Icon: Phone,
     label: "전화",
-    value: "010-5295-0074",
-    href: "tel:010-5295-0074",
+    value: PHONE_NUMBER,
+    href: PHONE_TEL_HREF,
     accent: "text-[#ff1493]",
   },
   {
     Icon: MessageCircle,
     label: "카카오톡",
-    value: "@lycsky",
-    href: "https://pf.kakao.com/",
+    value: KAKAO_CHANNEL_ID,
+    href: KAKAO_CHANNEL_URL,
     accent: "text-[#b347ff]",
   },
   {
     Icon: Mail,
     label: "이메일",
-    value: "lycsky@naver.com",
-    href: "mailto:lycsky@naver.com",
+    value: EMAIL_ADDRESS,
+    href: EMAIL_MAILTO_HREF,
     accent: "text-[#00dcff]",
   },
 ];

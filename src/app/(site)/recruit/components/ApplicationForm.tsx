@@ -93,18 +93,26 @@ export default function ApplicationForm() {
       noValidate
       className="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white border border-[#ededed] shadow-[0_2px_8px_rgba(0,0,0,0.04)] space-y-6"
     >
-      <Row label="이름" required error={errors.name?.message}>
+      <Field
+        id="recruit-name"
+        label="이름"
+        required
+        error={errors.name?.message}
+      >
         <input
+          id="recruit-name"
           {...register("name")}
           placeholder="홍길동"
           className={inputCls}
           autoComplete="name"
+          aria-invalid={!!errors.name}
         />
-      </Row>
+      </Field>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Row label="나이" error={errors.age?.message}>
+        <Field id="recruit-age" label="나이" error={errors.age?.message}>
           <input
+            id="recruit-age"
             type="number"
             inputMode="numeric"
             min={14}
@@ -112,66 +120,93 @@ export default function ApplicationForm() {
             {...register("age")}
             placeholder="예: 24"
             className={inputCls}
+            aria-invalid={!!errors.age}
           />
-        </Row>
-        <Row label="성별" error={errors.gender?.message}>
+        </Field>
+        <Group label="성별" error={errors.gender?.message}>
           <RadioGroup name="gender" options={genderOptions} register={register} />
-        </Row>
+        </Group>
       </div>
 
-      <Row label="연락처" required error={errors.phone?.message}>
+      <Field
+        id="recruit-phone"
+        label="연락처"
+        required
+        error={errors.phone?.message}
+      >
         <input
+          id="recruit-phone"
           type="tel"
           {...register("phone")}
           placeholder="010-1234-5678"
           className={inputCls}
           autoComplete="tel"
+          aria-invalid={!!errors.phone}
         />
-      </Row>
+      </Field>
 
-      <Row label="이메일" error={errors.email?.message}>
+      <Field id="recruit-email" label="이메일" error={errors.email?.message}>
         <input
+          id="recruit-email"
           type="email"
           {...register("email")}
           placeholder="you@example.com"
           className={inputCls}
           autoComplete="email"
+          aria-invalid={!!errors.email}
         />
-      </Row>
+      </Field>
 
-      <Row label="모집 부문" required error={errors.category?.message}>
+      <Group
+        label="모집 부문"
+        required
+        error={errors.category?.message}
+      >
         <RadioGroup
           name="category"
           options={categoryOptions}
           register={register}
           variant="card"
         />
-      </Row>
+      </Group>
 
-      <Row label="방송 경력" error={errors.experience?.message}>
+      <Field
+        id="recruit-experience"
+        label="방송 경력"
+        error={errors.experience?.message}
+      >
         <input
+          id="recruit-experience"
           {...register("experience")}
           placeholder="예: 치지직 1년, 평균 시청자 30명"
           className={inputCls}
+          aria-invalid={!!errors.experience}
         />
-      </Row>
+      </Field>
 
-      <Row label="자기소개" required error={errors.introduction?.message}>
+      <Field
+        id="recruit-introduction"
+        label="자기소개"
+        required
+        error={errors.introduction?.message}
+      >
         <textarea
+          id="recruit-introduction"
           {...register("introduction")}
           placeholder="간단한 자기소개와 함께 하고 싶은 컨텐츠, 강점 등을 자유롭게 적어주세요."
           rows={6}
           className={`${inputCls} resize-y`}
+          aria-invalid={!!errors.introduction}
         />
-      </Row>
+      </Field>
 
-      <Row label="선호 연락 방법" error={errors.preferred_contact?.message}>
+      <Group label="선호 연락 방법" error={errors.preferred_contact?.message}>
         <RadioGroup
           name="preferred_contact"
           options={contactOptions}
           register={register}
         />
-      </Row>
+      </Group>
 
       <div className="pt-2">
         <button
@@ -192,7 +227,43 @@ export default function ApplicationForm() {
 const inputCls =
   "w-full px-4 py-3 rounded-xl bg-white border border-[#ededed] text-[#0a0a0a] placeholder:text-[#aaaaaa] focus:outline-none focus:border-[#ff1493] focus:ring-2 focus:ring-[#ff1493]/20 transition";
 
-function Row({
+// 단일 input과 label을 htmlFor로 연결 — a11y 명시 연결.
+function Field({
+  id,
+  label,
+  required,
+  error,
+  children,
+}: {
+  id: string;
+  label: string;
+  required?: boolean;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  const errorId = `${id}-error`;
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="block text-sm font-semibold text-[#0a0a0a] mb-2"
+      >
+        {label}
+        {required && <span className="ml-1 text-[#ff1493]">*</span>}
+      </label>
+      {children}
+      {error && (
+        <p id={errorId} className="mt-1.5 text-xs text-[#ff1493]">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// 라디오 그룹용 — single input과 1:1 매핑 안 되므로 fieldset/legend 대신
+// 비형식 div + span 사용. 각 라디오는 자체 <label>로 implicit 연결됨.
+function Group({
   label,
   required,
   error,
@@ -204,11 +275,11 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label className="block text-sm font-semibold text-[#0a0a0a] mb-2">
+    <div role="group" aria-label={label}>
+      <span className="block text-sm font-semibold text-[#0a0a0a] mb-2">
         {label}
         {required && <span className="ml-1 text-[#ff1493]">*</span>}
-      </label>
+      </span>
       {children}
       {error && <p className="mt-1.5 text-xs text-[#ff1493]">{error}</p>}
     </div>

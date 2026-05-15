@@ -26,10 +26,14 @@ export default function LoginForm({
     >
       <input type="hidden" name="redirect" value={redirectTo} />
       <div>
-        <label className="block text-xs font-semibold text-[#525252] mb-1.5">
+        <label
+          htmlFor="admin-login-email"
+          className="block text-xs font-semibold text-[#525252] mb-1.5"
+        >
           이메일
         </label>
         <input
+          id="admin-login-email"
           name="email"
           type="email"
           autoComplete="username"
@@ -39,10 +43,14 @@ export default function LoginForm({
         />
       </div>
       <div>
-        <label className="block text-xs font-semibold text-[#525252] mb-1.5">
+        <label
+          htmlFor="admin-login-password"
+          className="block text-xs font-semibold text-[#525252] mb-1.5"
+        >
           비밀번호
         </label>
         <input
+          id="admin-login-password"
           name="password"
           type="password"
           autoComplete="current-password"

@@ -33,13 +33,14 @@ export async function submitRecruitApplication(
   const { error } = await supabase.from("recruit_applications").insert({
     name: data.name,
     age: data.age ? Number(data.age) : null,
-    gender: data.gender ?? null,
+    // "" 또는 undefined는 모두 null로 — DB 일관성 유지
+    gender: data.gender ? data.gender : null,
     phone: data.phone,
     email: data.email ? data.email : null,
     category: data.category,
     experience: data.experience ? data.experience : null,
     introduction: data.introduction,
-    preferred_contact: data.preferred_contact ?? null,
+    preferred_contact: data.preferred_contact ? data.preferred_contact : null,
   });
 
   if (error) {

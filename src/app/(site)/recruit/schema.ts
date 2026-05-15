@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+const GENDER_VALUES = ["male", "female", "other"] as const;
+const CONTACT_VALUES = ["phone", "kakao", "email"] as const;
+
 export const recruitSchema = z.object({
   name: z
     .string()
@@ -14,7 +17,14 @@ export const recruitSchema = z.object({
       (v) => !v || (/^\d+$/.test(v) && Number(v) >= 14 && Number(v) <= 80),
       "나이는 14~80 사이의 숫자로 입력해주세요.",
     ),
-  gender: z.enum(["male", "female", "other"]).optional(),
+  // 라디오 그룹 — 빈 문자열/undefined 모두 미선택으로 허용, 유효 값 검사는 refine으로
+  gender: z
+    .string()
+    .optional()
+    .refine(
+      (v) => !v || (GENDER_VALUES as readonly string[]).includes(v),
+      "성별을 선택해주세요.",
+    ),
   phone: z
     .string()
     .trim()
@@ -38,7 +48,13 @@ export const recruitSchema = z.object({
     .trim()
     .min(10, "자기소개를 10자 이상 입력해주세요.")
     .max(2000, "자기소개는 2000자 이내로 입력해주세요."),
-  preferred_contact: z.enum(["phone", "kakao", "email"]).optional(),
+  preferred_contact: z
+    .string()
+    .optional()
+    .refine(
+      (v) => !v || (CONTACT_VALUES as readonly string[]).includes(v),
+      "선호 연락 방법을 선택해주세요.",
+    ),
 });
 
 export type RecruitFormValues = z.infer<typeof recruitSchema>;

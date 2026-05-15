@@ -69,48 +69,62 @@ export default function InquiryForm() {
       noValidate
       className="max-w-3xl mx-auto p-6 sm:p-10 rounded-3xl bg-white border border-[#ededed] shadow-[0_2px_8px_rgba(0,0,0,0.04)] space-y-6"
     >
-      <Row label="이름" required error={errors.name?.message}>
+      <Field id="contact-name" label="이름" required error={errors.name?.message}>
         <input
+          id="contact-name"
           {...register("name")}
           placeholder="홍길동"
           className={inputCls}
           autoComplete="name"
+          aria-invalid={!!errors.name}
         />
-      </Row>
+      </Field>
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Row
+        <Field
+          id="contact-email"
           label="이메일"
           error={errors.email?.message}
           hint="이메일 또는 연락처 중 하나는 필수"
         >
           <input
+            id="contact-email"
             type="email"
             {...register("email")}
             placeholder="you@example.com"
             className={inputCls}
             autoComplete="email"
+            aria-invalid={!!errors.email}
           />
-        </Row>
-        <Row label="연락처" error={errors.phone?.message}>
+        </Field>
+        <Field id="contact-phone" label="연락처" error={errors.phone?.message}>
           <input
+            id="contact-phone"
             type="tel"
             {...register("phone")}
             placeholder="010-1234-5678"
             className={inputCls}
             autoComplete="tel"
+            aria-invalid={!!errors.phone}
           />
-        </Row>
+        </Field>
       </div>
 
-      <Row label="문의 내용" required error={errors.message?.message}>
+      <Field
+        id="contact-message"
+        label="문의 내용"
+        required
+        error={errors.message?.message}
+      >
         <textarea
+          id="contact-message"
           {...register("message")}
           placeholder="문의 주제, 회사 / 단체명, 원하시는 내용 등을 자유롭게 적어주세요."
           rows={7}
           className={`${inputCls} resize-y`}
+          aria-invalid={!!errors.message}
         />
-      </Row>
+      </Field>
 
       <div className="pt-2">
         <button
@@ -132,13 +146,15 @@ export default function InquiryForm() {
 const inputCls =
   "w-full px-4 py-3 rounded-xl bg-white border border-[#ededed] text-[#0a0a0a] placeholder:text-[#aaaaaa] focus:outline-none focus:border-[#ff1493] focus:ring-2 focus:ring-[#ff1493]/20 transition";
 
-function Row({
+function Field({
+  id,
   label,
   required,
   error,
   hint,
   children,
 }: {
+  id: string;
   label: string;
   required?: boolean;
   error?: string;
@@ -147,7 +163,10 @@ function Row({
 }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-[#0a0a0a] mb-2">
+      <label
+        htmlFor={id}
+        className="block text-sm font-semibold text-[#0a0a0a] mb-2"
+      >
         {label}
         {required && <span className="ml-1 text-[#ff1493]">*</span>}
         {hint && (

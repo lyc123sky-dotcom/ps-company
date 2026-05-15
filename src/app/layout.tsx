@@ -18,9 +18,18 @@ export const metadata: Metadata = {
     siteName: "피에스컴퍼니 · PS COMPANY",
     locale: "ko_KR",
     url: SITE_URL,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "피에스컴퍼니 · PS COMPANY",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/opengraph-image"],
   },
 };
 
