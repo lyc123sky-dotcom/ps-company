@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "피에스컴퍼니 | PS COMPANY",
@@ -18,6 +19,19 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Toaster
+          position="top-center"
+          theme="dark"
+          richColors
+          closeButton
+          toastOptions={{
+            style: {
+              background: "#1a1a1a",
+              border: "1px solid rgba(255, 20, 147, 0.3)",
+              color: "#fff",
+            },
+          }}
+        />
       </body>
     </html>
   );

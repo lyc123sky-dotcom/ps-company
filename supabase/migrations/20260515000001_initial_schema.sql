@@ -86,15 +86,17 @@ alter table public.recruit_applications enable row level security;
 
 -- creators: 활성 크리에이터는 누구나 조회 가능
 create policy "Anyone can view active creators"
-  on public.creators for select
+  on public.creators for select to anon, authenticated
   using (is_active = true);
 
--- inquiries: 누구나 등록 가능, 조회는 인증된 admin만 (추후 정책)
+-- inquiries: 누구나 등록 가능, 조회는 admin만 (추후 정책)
+-- 주의: anon은 SELECT 정책이 없으므로 INSERT 시 RETURNING 사용 금지
+-- (supabase-js는 .select() 미체이닝 시 Prefer: return=minimal 자동 전송)
 create policy "Anyone can submit inquiries"
-  on public.inquiries for insert
+  on public.inquiries for insert to anon, authenticated
   with check (true);
 
 -- recruit_applications: 누구나 등록 가능, 조회는 admin만 (추후)
 create policy "Anyone can submit applications"
-  on public.recruit_applications for insert
+  on public.recruit_applications for insert to anon, authenticated
   with check (true);
