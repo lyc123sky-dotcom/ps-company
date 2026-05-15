@@ -19,6 +19,7 @@ export const metadata: Metadata = {
     title: "BJ 모집 | 피에스컴퍼니",
     description:
       "월 500~1,000만원, 1일 최소 20만원 보장. 초보 환영.",
+    images: ["/opengraph-image"],
   },
 };
 

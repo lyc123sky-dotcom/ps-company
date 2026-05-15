@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     url: "/contact",
     title: "문의 | 피에스컴퍼니",
     description: "제휴 · 협업 · 광고 등 모든 문의를 환영합니다.",
+    images: ["/opengraph-image"],
   },
 };
 

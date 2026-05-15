@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     url: "/creators",
     title: "크리에이터 | 피에스컴퍼니",
     description: "피에스컴퍼니와 함께하는 BJ들.",
+    images: ["/opengraph-image"],
   },
 };
 

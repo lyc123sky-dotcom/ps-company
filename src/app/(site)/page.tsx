@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     title: "피에스컴퍼니 | PS COMPANY · 크리에이터 매니지먼트",
     description:
       "유튜브 · 치지직 · SOOP · 틱톡에서 활동하는 BJ들과 함께 만들어가는 전문 매니지먼트.",
+    images: ["/opengraph-image"],
   },
 };
 
