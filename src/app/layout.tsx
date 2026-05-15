@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "sonner";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ps-company-one.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pscp.to";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

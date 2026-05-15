@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ps-company-one.vercel.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pscp.to";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
