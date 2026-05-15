@@ -163,7 +163,7 @@ export default async function ApplicationsListPage({
                 <tr>
                   <td
                     colSpan={7}
-                    className="px-4 py-12 text-center text-sm text-[#888888]"
+                    className="px-4 py-12 text-center text-sm text-[#737373]"
                   >
                     해당 상태의 지원서가 없습니다.
                   </td>

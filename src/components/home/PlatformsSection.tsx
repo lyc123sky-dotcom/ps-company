@@ -10,7 +10,7 @@ export default function PlatformsSection() {
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <div className="text-center mb-10">
-          <p className="text-xs font-bold tracking-[0.2em] text-[#888888] mb-3">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#737373] mb-3">
             PLATFORMS
           </p>
           <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-[#0a0a0a]">

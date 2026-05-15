@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LinkButton } from "@/components/ui/Button";
 
 export default function CtaSection() {
   return (
@@ -23,32 +23,26 @@ export default function CtaSection() {
             aria-hidden
           />
           <div className="relative max-w-2xl">
-            <p className="text-xs font-bold tracking-[0.2em] text-[#00dcff] mb-4">
+            <p className="text-xs font-bold tracking-[0.14em] text-[#00dcff] mb-4 uppercase">
               GET STARTED
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight">
               지금, 함께{" "}
               <span className="bg-gradient-to-r from-[#ff1493] to-[#b347ff] bg-clip-text text-transparent">
                 시작합시다
               </span>
             </h2>
-            <p className="mt-5 text-white/75 text-base sm:text-lg leading-relaxed">
+            <p className="mt-5 text-white/85 text-base sm:text-lg leading-relaxed">
               크리에이터로서 본인의 다음 챕터를 피에스컴퍼니와 함께 열어보세요.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/recruit#apply"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.5)] transition-shadow"
-              >
+              <LinkButton href="/recruit#apply" variant="primary" size="lg">
                 BJ 지원하기
                 <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-white border border-white/30 rounded-xl hover:bg-white hover:text-[#0a0a0a] transition"
-              >
+              </LinkButton>
+              <LinkButton href="/contact" variant="inverse" size="lg">
                 문의하기
-              </Link>
+              </LinkButton>
             </div>
           </div>
         </div>

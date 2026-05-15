@@ -98,7 +98,7 @@ export default function CreatorForm({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <span className="text-xs text-[#888888]">no image</span>
+              <span className="text-xs text-[#737373]">no image</span>
             )}
           </div>
           <div className="flex-1 space-y-2">
@@ -110,7 +110,7 @@ export default function CreatorForm({
               onChange={onFileChange}
               className="block text-sm text-[#525252] file:mr-3 file:px-3 file:py-1.5 file:rounded-md file:border-0 file:bg-[#0a0a0a] file:text-white file:text-xs file:font-bold hover:file:bg-[#222]"
             />
-            <p className="text-xs text-[#888888]">
+            <p className="text-xs text-[#737373]">
               JPEG · PNG · WebP, 최대 5MB. {mode === "edit" && initial.profile_image_url && "비워두면 기존 사진을 유지합니다."}
             </p>
             {preview && preview !== (initial.profile_image_url ?? null) && (

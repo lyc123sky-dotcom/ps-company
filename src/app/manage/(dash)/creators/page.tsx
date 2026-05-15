@@ -107,7 +107,7 @@ export default async function CreatorsListPage({
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-[10px] text-[#888888]">no img</span>
+                    <span className="text-[10px] text-[#737373]">no img</span>
                   )}
                 </div>
                 <div className="flex-1 min-w-0">

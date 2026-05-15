@@ -7,12 +7,14 @@
   --bg-muted: #ededed;
   --text-primary: #0a0a0a;
   --text-secondary: #525252;
-  --text-muted: #888888;
+  --text-muted: #737373; /* P1-07: #888 → 4.83:1 통과 */
   --neon-pink: #ff1493;
   --neon-purple: #b347ff;
   --accent-cyan: #00dcff;
+  --border-default: #d4d4d4;
   --border-subtle: #ededed;
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 12px 32px rgba(255, 20, 147, 0.15);
 }
 
 @theme inline {
@@ -25,6 +27,7 @@
   --color-neon-pink: var(--neon-pink);
   --color-neon-purple: var(--neon-purple);
   --color-accent-cyan: var(--accent-cyan);
+  --color-border-default: var(--border-default);
   --color-border-subtle: var(--border-subtle);
   --font-sans:
     Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
@@ -46,4 +49,34 @@ body {
 ::selection {
   background: var(--neon-pink);
   color: #fff;
+}
+
+/* P0-04: 키보드 포커스 링 전역 */
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: 2px solid var(--neon-pink);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* 한글 헤딩 행간 (P1-04) */
+h1 {
+  line-height: 1.2;
+}
+h2 {
+  line-height: 1.25;
+}
+
+/* prefers-reduced-motion 존중 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

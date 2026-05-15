@@ -110,7 +110,7 @@ export default async function ApplicationDetailPage({
             </p>
             {app.experience && (
               <div className="mt-4">
-                <div className="text-xs font-semibold text-[#888888] mb-1">
+                <div className="text-xs font-semibold text-[#737373] mb-1">
                   방송 경력
                 </div>
                 <p className="text-[#0a0a0a]">{app.experience}</p>
@@ -146,7 +146,7 @@ export default async function ApplicationDetailPage({
               >
                 저장
               </button>
-              <p className="text-[10px] text-[#888888]">
+              <p className="text-[10px] text-[#737373]">
                 변경 시 갱신 시각은 자동 기록됩니다.
               </p>
             </form>
@@ -214,7 +214,7 @@ function DL({ children }: { children: React.ReactNode }) {
 function DLRow({ k, v }: { k: string; v: string }) {
   return (
     <div>
-      <dt className="text-xs text-[#888888]">{k}</dt>
+      <dt className="text-xs text-[#737373]">{k}</dt>
       <dd className="text-sm text-[#0a0a0a] font-medium mt-0.5">{v}</dd>
     </div>
   );

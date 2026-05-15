@@ -1,5 +1,5 @@
-import Link from "next/link";
 import HeroVisual from "./HeroVisual";
+import { LinkButton } from "@/components/ui/Button";
 
 export default function HeroSection() {
   return (
@@ -8,10 +8,10 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28 lg:py-32">
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-2 items-center">
           <div>
-            <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-wide text-[#ff1493] bg-[#ff1493]/8 border border-[#ff1493]/20 rounded-full">
+            <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-[0.14em] text-[#ff1493] bg-[#ff1493]/8 border border-[#ff1493]/20 rounded-full uppercase">
               PS COMPANY · 피에스컴퍼니
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-[#0a0a0a]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#0a0a0a]">
               크리에이터가
               <br />
               <span className="bg-gradient-to-r from-[#ff1493] to-[#b347ff] bg-clip-text text-transparent">
@@ -22,19 +22,13 @@ export default function HeroSection() {
               유튜브 · 치지직 · SOOP · 틱톡 등 4대 플랫폼에서 활동하는 BJ들과 함께 만들어가는 전문 매니지먼트 기업입니다. 크리에이터 한 명 한 명의 색깔을 존중하고 그 가능성을 끝까지 끌어올립니다.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/recruit#apply"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.35)] transition-shadow"
-              >
+              <LinkButton href="/recruit#apply" variant="primary" size="lg">
                 BJ 지원하기
                 <span aria-hidden>→</span>
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-[#0a0a0a] border border-[#0a0a0a] rounded-xl hover:bg-[#0a0a0a] hover:text-white transition"
-              >
+              </LinkButton>
+              <LinkButton href="/contact" variant="secondary" size="lg">
                 문의하기
-              </Link>
+              </LinkButton>
             </div>
           </div>
           <div className="order-first lg:order-last">

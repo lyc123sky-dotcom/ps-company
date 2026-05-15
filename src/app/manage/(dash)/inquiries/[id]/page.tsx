@@ -153,7 +153,7 @@ function DL({ children }: { children: React.ReactNode }) {
 function DLRow({ k, v }: { k: string; v: string }) {
   return (
     <div>
-      <dt className="text-xs text-[#888888]">{k}</dt>
+      <dt className="text-xs text-[#737373]">{k}</dt>
       <dd className="text-sm text-[#0a0a0a] font-medium mt-0.5">{v}</dd>
     </div>
   );

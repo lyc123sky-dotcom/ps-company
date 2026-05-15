@@ -65,7 +65,7 @@ export default function ContactInfo() {
                   strokeWidth={1.75}
                 />
                 <div>
-                  <div className="text-xs text-[#888888]">{c.label}</div>
+                  <div className="text-xs text-[#737373]">{c.label}</div>
                   <div className="text-[#0a0a0a] font-semibold">{c.value}</div>
                 </div>
               </a>

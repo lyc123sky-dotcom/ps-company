@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Sparkles } from "lucide-react";
+import { Button, LinkButton } from "@/components/ui/Button";
 import { recruitSchema, type RecruitFormValues } from "../schema";
 import { submitRecruitApplication } from "../actions";
 
@@ -42,6 +44,7 @@ export default function ApplicationForm() {
       email: "",
       experience: "",
       introduction: "",
+      agreed: false,
     },
   });
 
@@ -73,16 +76,18 @@ export default function ApplicationForm() {
         <p className="mt-3 text-[#525252]">
           확인 후 영업일 기준 1~3일 내 연락드리겠습니다.
         </p>
-        <p className="mt-1 text-sm text-[#888888]">
+        <p className="mt-1 text-sm text-[#737373]">
           급한 문의는 010-5295-0074 또는 카카오톡 @lycsky로 연락주세요.
         </p>
-        <button
+        <Button
           type="button"
+          variant="secondary"
+          size="sm"
           onClick={() => setSubmitted(false)}
-          className="mt-6 px-5 py-2 text-sm text-[#0a0a0a] border border-[#0a0a0a] rounded-full hover:bg-[#0a0a0a] hover:text-white transition"
+          className="mt-6"
         >
           새 지원서 작성
-        </button>
+        </Button>
       </div>
     );
   }
@@ -105,6 +110,8 @@ export default function ApplicationForm() {
           placeholder="홍길동"
           className={inputCls}
           autoComplete="name"
+          required
+          aria-required="true"
           aria-invalid={!!errors.name}
         />
       </Field>
@@ -123,9 +130,13 @@ export default function ApplicationForm() {
             aria-invalid={!!errors.age}
           />
         </Field>
-        <Group label="성별" error={errors.gender?.message}>
-          <RadioGroup name="gender" options={genderOptions} register={register} />
-        </Group>
+        <RadioFieldset
+          legend="성별"
+          name="gender"
+          options={genderOptions}
+          register={register}
+          error={errors.gender?.message}
+        />
       </div>
 
       <Field
@@ -141,6 +152,8 @@ export default function ApplicationForm() {
           placeholder="010-1234-5678"
           className={inputCls}
           autoComplete="tel"
+          required
+          aria-required="true"
           aria-invalid={!!errors.phone}
         />
       </Field>
@@ -157,18 +170,15 @@ export default function ApplicationForm() {
         />
       </Field>
 
-      <Group
-        label="모집 부문"
-        required
+      <RadioFieldset
+        legend="모집 부문"
+        name="category"
+        options={categoryOptions}
+        register={register}
         error={errors.category?.message}
-      >
-        <RadioGroup
-          name="category"
-          options={categoryOptions}
-          register={register}
-          variant="card"
-        />
-      </Group>
+        required
+        variant="card"
+      />
 
       <Field
         id="recruit-experience"
@@ -196,28 +206,38 @@ export default function ApplicationForm() {
           placeholder="간단한 자기소개와 함께 하고 싶은 컨텐츠, 강점 등을 자유롭게 적어주세요."
           rows={6}
           className={`${inputCls} resize-y`}
+          required
+          aria-required="true"
           aria-invalid={!!errors.introduction}
         />
       </Field>
 
-      <Group label="선호 연락 방법" error={errors.preferred_contact?.message}>
-        <RadioGroup
-          name="preferred_contact"
-          options={contactOptions}
-          register={register}
-        />
-      </Group>
+      <RadioFieldset
+        legend="선호 연락 방법"
+        name="preferred_contact"
+        options={contactOptions}
+        register={register}
+        error={errors.preferred_contact?.message}
+      />
+
+      <ConsentCheckbox
+        id="recruit-agreed"
+        register={register}
+        error={errors.agreed?.message}
+      />
 
       <div className="pt-2">
-        <button
-          type="submit"
-          disabled={isPending}
-          className="w-full sm:w-auto px-10 py-4 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.35)] transition-shadow disabled:opacity-60 disabled:cursor-wait"
-        >
+        <Button type="submit" disabled={isPending} size="lg">
           {isPending ? "제출 중..." : "지원서 제출"}
-        </button>
-        <p className="mt-3 text-xs text-[#888888]">
-          제출하시면 개인정보 수집 및 이용에 동의한 것으로 간주됩니다. 수집된 정보는 지원 검토 및 연락 목적으로만 사용됩니다.
+        </Button>
+        <p className="mt-3 text-xs text-[#737373]">
+          수집된 정보는 지원 검토 및 연락 목적으로만 사용됩니다.{" "}
+          <Link
+            href="/privacy"
+            className="underline decoration-[#737373]/40 underline-offset-2 hover:text-[#0a0a0a] hover:decoration-[#0a0a0a]"
+          >
+            개인정보처리방침 보기
+          </Link>
         </p>
       </div>
     </form>
@@ -225,9 +245,8 @@ export default function ApplicationForm() {
 }
 
 const inputCls =
-  "w-full px-4 py-3 rounded-xl bg-white border border-[#ededed] text-[#0a0a0a] placeholder:text-[#aaaaaa] focus:outline-none focus:border-[#ff1493] focus:ring-2 focus:ring-[#ff1493]/20 transition";
+  "w-full px-4 py-3 rounded-xl bg-white border border-[#d4d4d4] text-[#0a0a0a] placeholder:text-[#9ca3af] hover:border-[#a3a3a3] focus-visible:border-[#ff1493] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff1493]/20 aria-[invalid=true]:border-[#dc2626] aria-[invalid=true]:focus-visible:ring-[#dc2626]/20 transition";
 
-// 단일 input과 label을 htmlFor로 연결 — a11y 명시 연결.
 function Field({
   id,
   label,
@@ -241,7 +260,6 @@ function Field({
   error?: string;
   children: React.ReactNode;
 }) {
-  const errorId = `${id}-error`;
   return (
     <div>
       <label
@@ -249,11 +267,16 @@ function Field({
         className="block text-sm font-semibold text-[#0a0a0a] mb-2"
       >
         {label}
-        {required && <span className="ml-1 text-[#ff1493]">*</span>}
+        {required && (
+          <span className="ml-1 text-[#ff1493]" aria-hidden>
+            *
+          </span>
+        )}
+        {required && <span className="sr-only">(필수)</span>}
       </label>
       {children}
       {error && (
-        <p id={errorId} className="mt-1.5 text-xs text-[#ff1493]">
+        <p className="mt-1.5 text-xs text-[#dc2626]" role="alert">
           {error}
         </p>
       )}
@@ -261,72 +284,124 @@ function Field({
   );
 }
 
-// 라디오 그룹용 — single input과 1:1 매핑 안 되므로 fieldset/legend 대신
-// 비형식 div + span 사용. 각 라디오는 자체 <label>로 implicit 연결됨.
-function Group({
-  label,
-  required,
-  error,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div role="group" aria-label={label}>
-      <span className="block text-sm font-semibold text-[#0a0a0a] mb-2">
-        {label}
-        {required && <span className="ml-1 text-[#ff1493]">*</span>}
-      </span>
-      {children}
-      {error && <p className="mt-1.5 text-xs text-[#ff1493]">{error}</p>}
-    </div>
-  );
-}
-
-function RadioGroup<T extends string>({
+function RadioFieldset<T extends string>({
+  legend,
   name,
   options,
   register,
+  error,
+  required,
   variant = "pill",
 }: {
-  name: string;
+  legend: string;
+  name: keyof RecruitFormValues;
   options: readonly { value: T; label: string }[];
   register: ReturnType<typeof useForm<RecruitFormValues>>["register"];
+  error?: string;
+  required?: boolean;
   variant?: "pill" | "card";
 }) {
   return (
-    <div
-      className={
-        variant === "card" ? "grid gap-3 sm:grid-cols-2" : "flex flex-wrap gap-2"
-      }
-    >
-      {options.map((opt) => (
-        <label
-          key={opt.value}
-          className={
-            variant === "card"
-              ? "relative flex items-center gap-3 px-4 py-4 rounded-xl bg-white border border-[#ededed] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition"
-              : "px-4 py-2 rounded-full bg-white border border-[#ededed] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition text-sm"
-          }
-        >
-          <input
-            type="radio"
-            value={opt.value}
-            {...register(name as keyof RecruitFormValues)}
-            className="sr-only peer"
-          />
-          {variant === "card" && (
-            <span
-              className="w-4 h-4 rounded-full border-2 border-[#cccccc] peer-checked:border-[#ff1493] peer-checked:bg-[#ff1493] shrink-0"
-              aria-hidden
-            />
-          )}
-          <span className="text-[#0a0a0a]">{opt.label}</span>
-        </label>
-      ))}
+    <fieldset>
+      <legend className="block text-sm font-semibold text-[#0a0a0a] mb-2">
+        {legend}
+        {required && (
+          <span className="ml-1 text-[#ff1493]" aria-hidden>
+            *
+          </span>
+        )}
+        {required && <span className="sr-only">(필수)</span>}
+      </legend>
+      <div
+        className={
+          variant === "card"
+            ? "grid gap-3 sm:grid-cols-2"
+            : "flex flex-wrap gap-2"
+        }
+      >
+        {options.map((opt) => {
+          const id = `${name}-${opt.value}`;
+          return (
+            <label
+              key={opt.value}
+              htmlFor={id}
+              className={
+                variant === "card"
+                  ? "relative flex items-center gap-3 px-4 py-4 rounded-xl bg-white border border-[#d4d4d4] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition"
+                  : "px-4 py-2 rounded-full bg-white border border-[#d4d4d4] cursor-pointer hover:border-[#0a0a0a]/40 has-[:checked]:border-[#ff1493] has-[:checked]:bg-[#ff1493]/5 transition text-sm"
+              }
+            >
+              <input
+                id={id}
+                type="radio"
+                value={opt.value}
+                {...register(name)}
+                required={required}
+                className="sr-only peer"
+              />
+              {variant === "card" && (
+                <span
+                  className="w-4 h-4 rounded-full border-2 border-[#cccccc] peer-checked:border-[#ff1493] peer-checked:bg-[#ff1493] shrink-0"
+                  aria-hidden
+                />
+              )}
+              <span className="text-[#0a0a0a]">{opt.label}</span>
+            </label>
+          );
+        })}
+      </div>
+      {error && (
+        <p className="mt-1.5 text-xs text-[#dc2626]" role="alert">
+          {error}
+        </p>
+      )}
+    </fieldset>
+  );
+}
+
+function ConsentCheckbox({
+  id,
+  register,
+  error,
+}: {
+  id: string;
+  register: ReturnType<typeof useForm<RecruitFormValues>>["register"];
+  error?: string;
+}) {
+  return (
+    <div>
+      <label
+        htmlFor={id}
+        className="flex items-start gap-2.5 text-sm text-[#525252] cursor-pointer"
+      >
+        <input
+          id={id}
+          type="checkbox"
+          {...register("agreed")}
+          required
+          aria-required="true"
+          className="mt-0.5 w-4 h-4 rounded border-[#d4d4d4] text-[#ff1493] focus-visible:ring-2 focus-visible:ring-[#ff1493]/20 shrink-0"
+        />
+        <span>
+          <Link
+            href="/privacy"
+            target="_blank"
+            className="underline decoration-[#737373]/40 underline-offset-2 hover:text-[#0a0a0a] hover:decoration-[#0a0a0a]"
+          >
+            개인정보 수집 및 이용
+          </Link>
+          에 동의합니다{" "}
+          <span className="text-[#ff1493]" aria-hidden>
+            *
+          </span>
+          <span className="sr-only">(필수)</span>
+        </span>
+      </label>
+      {error && (
+        <p className="mt-1.5 text-xs text-[#dc2626]" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }

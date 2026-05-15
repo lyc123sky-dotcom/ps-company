@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LinkButton } from "@/components/ui/Button";
 
 const platforms = ["YouTube", "치지직", "SOOP", "TikTok"];
 
@@ -7,10 +7,10 @@ export default function HeroSection() {
     <section className="relative bg-white">
       <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#ff1493] via-[#b347ff] to-[#00dcff]" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32 text-center">
-        <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-wide text-[#ff1493] bg-[#ff1493]/8 border border-[#ff1493]/20 rounded-full">
+        <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-[0.14em] text-[#ff1493] bg-[#ff1493]/8 border border-[#ff1493]/20 rounded-full uppercase">
           NOW HIRING · 대규모 모집
         </div>
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.1] text-[#0a0a0a]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#0a0a0a]">
           <span className="bg-gradient-to-r from-[#ff1493] via-[#b347ff] to-[#00dcff] bg-clip-text text-transparent">
             인플루언서 · BJ
           </span>
@@ -31,13 +31,10 @@ export default function HeroSection() {
           ))}
         </div>
         <div className="mt-12">
-          <Link
-            href="#apply"
-            className="inline-flex items-center gap-2 px-8 py-4 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.35)] transition-shadow"
-          >
+          <LinkButton href="#apply" variant="primary" size="lg">
             지금 지원하기
             <span aria-hidden>→</span>
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </section>

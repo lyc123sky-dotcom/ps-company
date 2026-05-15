@@ -155,7 +155,7 @@ export default async function InquiriesListPage({
                 <tr>
                   <td
                     colSpan={6}
-                    className="px-4 py-12 text-center text-sm text-[#888888]"
+                    className="px-4 py-12 text-center text-sm text-[#737373]"
                   >
                     해당 상태의 문의가 없습니다.
                   </td>

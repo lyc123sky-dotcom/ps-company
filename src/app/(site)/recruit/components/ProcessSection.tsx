@@ -37,7 +37,7 @@ export default function ProcessSection() {
                 strokeWidth={1.75}
               />
               <div className="font-bold text-[#0a0a0a]">{s.title}</div>
-              <div className="text-xs text-[#888888] mt-1">{s.desc}</div>
+              <div className="text-xs text-[#737373] mt-1">{s.desc}</div>
             </li>
           ))}
         </ol>

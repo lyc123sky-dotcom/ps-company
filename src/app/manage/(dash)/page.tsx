@@ -96,7 +96,7 @@ export default async function DashboardPage() {
             <div
               className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${c.accent}`}
             />
-            <div className="text-xs font-semibold text-[#888888] uppercase tracking-wider">
+            <div className="text-xs font-semibold text-[#737373] uppercase tracking-wider">
               {c.label}
             </div>
             {c.sublabel && (

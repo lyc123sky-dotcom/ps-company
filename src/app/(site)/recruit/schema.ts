@@ -55,6 +55,9 @@ export const recruitSchema = z.object({
       (v) => !v || (CONTACT_VALUES as readonly string[]).includes(v),
       "선호 연락 방법을 선택해주세요.",
     ),
+  agreed: z
+    .boolean()
+    .refine((v) => v === true, "개인정보 수집·이용에 동의해주세요."),
 });
 
 export type RecruitFormValues = z.infer<typeof recruitSchema>;

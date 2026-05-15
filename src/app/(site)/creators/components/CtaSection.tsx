@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LinkButton } from "@/components/ui/Button";
 
 export default function CtaSection() {
   return (
@@ -14,13 +14,10 @@ export default function CtaSection() {
           유튜브 · 치지직 · SOOP · 틱톡 BJ 대규모 모집 진행 중
         </p>
         <div className="mt-8">
-          <Link
-            href="/recruit#apply"
-            className="inline-flex items-center gap-2 px-7 py-3.5 text-base font-bold text-white rounded-xl bg-gradient-to-r from-[#ff1493] to-[#b347ff] hover:shadow-[0_8px_32px_rgba(255,20,147,0.35)] transition-shadow"
-          >
+          <LinkButton href="/recruit#apply" variant="primary" size="lg">
             BJ 지원하기
             <span aria-hidden>→</span>
-          </Link>
+          </LinkButton>
         </div>
       </div>
     </section>

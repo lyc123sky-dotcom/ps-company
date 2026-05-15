@@ -52,7 +52,7 @@ export default function ValuesSection() {
     <section className="bg-[#f7f7f7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold tracking-[0.2em] text-[#888888] mb-3">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#737373] mb-3">
             WHY PS COMPANY
           </p>
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-[#0a0a0a]">

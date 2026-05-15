@@ -71,7 +71,7 @@ export default function QuickContactCards() {
                 strokeWidth={1.75}
               />
               <div>
-                <div className="text-xs text-[#888888]">{c.label}</div>
+                <div className="text-xs text-[#737373]">{c.label}</div>
                 <div className="text-[#0a0a0a] font-bold text-lg">{c.value}</div>
               </div>
             </a>
