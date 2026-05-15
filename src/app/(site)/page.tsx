@@ -3,6 +3,7 @@ import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import ValuesSection from "@/components/home/ValuesSection";
 import IntroductionSection from "@/components/home/IntroductionSection";
+import StudioSection from "@/components/home/StudioSection";
 import CtaSection from "@/components/home/CtaSection";
 
 export const metadata: Metadata = {
@@ -37,6 +38,7 @@ export default function Home() {
       <PlatformsSection />
       <ValuesSection />
       <IntroductionSection />
+      <StudioSection />
       <CtaSection />
     </>
   );
