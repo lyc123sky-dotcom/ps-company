@@ -5,24 +5,29 @@ export const dynamic = "force-dynamic";
 
 async function getCounts() {
   const supabase = createAdminClient();
-  const [submittedRes, activeRes, newRes, allRes, allInqRes] = await Promise.all([
-    supabase
-      .from("recruit_applications")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "submitted"),
-    supabase
-      .from("recruit_applications")
-      .select("id", { count: "exact", head: true })
-      .in("status", ["reviewing", "interview"]),
-    supabase
-      .from("inquiries")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "new"),
-    supabase
-      .from("recruit_applications")
-      .select("id", { count: "exact", head: true }),
-    supabase.from("inquiries").select("id", { count: "exact", head: true }),
-  ]);
+  const [submittedRes, activeRes, newRes, allRes, allInqRes, creatorsRes] =
+    await Promise.all([
+      supabase
+        .from("recruit_applications")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "submitted"),
+      supabase
+        .from("recruit_applications")
+        .select("id", { count: "exact", head: true })
+        .in("status", ["reviewing", "interview"]),
+      supabase
+        .from("inquiries")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "new"),
+      supabase
+        .from("recruit_applications")
+        .select("id", { count: "exact", head: true }),
+      supabase.from("inquiries").select("id", { count: "exact", head: true }),
+      supabase
+        .from("creators")
+        .select("id", { count: "exact", head: true })
+        .eq("is_active", true),
+    ]);
 
   return {
     appsSubmitted: submittedRes.count ?? 0,
@@ -30,6 +35,7 @@ async function getCounts() {
     inquiriesNew: newRes.count ?? 0,
     appsTotal: allRes.count ?? 0,
     inquiriesTotal: allInqRes.count ?? 0,
+    activeCreators: creatorsRes.count ?? 0,
   };
 }
 
@@ -38,26 +44,32 @@ export default async function DashboardPage() {
 
   const cards = [
     {
-      href: "/admin/applications?status=submitted",
+      href: "/manage/applications?status=submitted",
       label: "신규 BJ 지원",
       value: counts.appsSubmitted,
       accent: "from-[#ff1493] to-[#b347ff]",
     },
     {
-      href: "/admin/applications?status=reviewing",
+      href: "/manage/applications?status=reviewing",
       label: "진행 중 BJ 지원",
       sublabel: "검토 + 면접",
       value: counts.appsActive,
       accent: "from-[#b347ff] to-[#00dcff]",
     },
     {
-      href: "/admin/inquiries?status=new",
+      href: "/manage/inquiries?status=new",
       label: "신규 문의",
       value: counts.inquiriesNew,
       accent: "from-[#00dcff] to-[#b347ff]",
     },
     {
-      href: "/admin/applications",
+      href: "/manage/creators",
+      label: "활성 크리에이터",
+      value: counts.activeCreators,
+      accent: "from-[#ff1493] to-[#00dcff]",
+    },
+    {
+      href: "/manage/applications",
       label: "BJ 지원 누적",
       value: counts.appsTotal,
       accent: "from-[#525252] to-[#0a0a0a]",
@@ -74,7 +86,7 @@ export default async function DashboardPage() {
           현재 접수 현황 한눈에 보기 · 카드를 클릭하면 해당 리스트로 이동합니다.
         </p>
       </div>
-      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {cards.map((c) => (
           <Link
             key={c.label}
@@ -102,9 +114,9 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-2">
+      <div className="mt-12 grid gap-6 md:grid-cols-3">
         <Link
-          href="/admin/applications"
+          href="/manage/applications"
           className="p-6 rounded-2xl bg-white border border-[#ededed] hover:border-[#ff1493]/40 transition"
         >
           <div className="font-bold text-[#0a0a0a]">BJ 지원 관리</div>
@@ -113,12 +125,21 @@ export default async function DashboardPage() {
           </p>
         </Link>
         <Link
-          href="/admin/inquiries"
+          href="/manage/inquiries"
           className="p-6 rounded-2xl bg-white border border-[#ededed] hover:border-[#b347ff]/40 transition"
         >
           <div className="font-bold text-[#0a0a0a]">문의 관리</div>
           <p className="mt-1 text-sm text-[#525252]">
             제휴 · 협업 · 광고 문의 확인 · 답신 상태 관리
+          </p>
+        </Link>
+        <Link
+          href="/manage/creators"
+          className="p-6 rounded-2xl bg-white border border-[#ededed] hover:border-[#00dcff]/40 transition"
+        >
+          <div className="font-bold text-[#0a0a0a]">크리에이터 관리</div>
+          <p className="mt-1 text-sm text-[#525252]">
+            소속 크리에이터 등록 · 사진 업로드 · 표시 순서 · 활성 토글
           </p>
         </Link>
       </div>

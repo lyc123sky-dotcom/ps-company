@@ -6,6 +6,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // /admin/* 만 검사 (정적/이미지/api 제외)
-  matcher: ["/admin/:path*"],
+  // /manage/* 만 검사 (정적/이미지/api 제외)
+  matcher: ["/manage/:path*"],
 };

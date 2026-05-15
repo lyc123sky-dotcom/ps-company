@@ -24,7 +24,7 @@ export async function updateApplicationStatus(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath("/admin/applications");
-  revalidatePath(`/admin/applications/${id}`);
-  revalidatePath("/admin");
+  revalidatePath("/manage/applications");
+  revalidatePath(`/manage/applications/${id}`);
+  revalidatePath("/manage");
 }

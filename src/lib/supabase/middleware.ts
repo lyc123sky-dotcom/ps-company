@@ -32,22 +32,22 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isLoginPage = path === "/admin/login";
-  const isAdminArea = path.startsWith("/admin");
+  const isLoginPage = path === "/manage/login";
+  const isAdminArea = path.startsWith("/manage");
   const isAuthedAdmin = !!user && user.email === ADMIN_EMAIL;
 
-  // 1. 미인증으로 /admin/* (login 제외) 접근 시 → /admin/login
+  // 1. 미인증으로 /manage/* (login 제외) 접근 시 → /manage/login
   if (isAdminArea && !isLoginPage && !isAuthedAdmin) {
     const url = request.nextUrl.clone();
-    url.pathname = "/admin/login";
+    url.pathname = "/manage/login";
     url.searchParams.set("redirect", path);
     return NextResponse.redirect(url);
   }
 
-  // 2. 이미 로그인된 어드민이 /admin/login 접근 시 → /admin
+  // 2. 이미 로그인된 어드민이 /manage/login 접근 시 → /manage
   if (isLoginPage && isAuthedAdmin) {
     const url = request.nextUrl.clone();
-    url.pathname = "/admin";
+    url.pathname = "/manage";
     url.searchParams.delete("redirect");
     return NextResponse.redirect(url);
   }

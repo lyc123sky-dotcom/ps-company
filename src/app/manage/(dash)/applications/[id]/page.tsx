@@ -50,7 +50,7 @@ export default async function ApplicationDetailPage({
     <div>
       <div className="mb-6">
         <Link
-          href="/admin/applications"
+          href="/manage/applications"
           className="text-xs text-[#525252] hover:text-[#0a0a0a]"
         >
           ← 전체 지원 목록

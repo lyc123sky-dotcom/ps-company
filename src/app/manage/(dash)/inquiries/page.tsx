@@ -2,25 +2,14 @@ import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import StatusBadge from "@/components/admin/StatusBadge";
 import {
-  APPLICATION_STATUSES,
-  APPLICATION_STATUS_LABEL,
-  type ApplicationStatus,
+  INQUIRY_STATUSES,
+  INQUIRY_STATUS_LABEL,
+  type InquiryStatus,
 } from "@/lib/admin/constants";
 
 export const dynamic = "force-dynamic";
 
 const PAGE_SIZE = 20;
-
-const CATEGORY_LABEL: Record<string, string> = {
-  personal: "개인 컨텐츠",
-  crew: "크루 게스트",
-};
-
-const CONTACT_LABEL: Record<string, string> = {
-  phone: "전화",
-  kakao: "카톡",
-  email: "이메일",
-};
 
 function fmtDate(iso: string) {
   const d = new Date(iso);
@@ -32,15 +21,19 @@ function fmtDate(iso: string) {
   return `${y}-${mo}-${da} ${h}:${mi}`;
 }
 
-export default async function ApplicationsListPage({
+function clip(text: string, n = 50) {
+  return text.length > n ? text.slice(0, n) + "…" : text;
+}
+
+export default async function InquiriesListPage({
   searchParams,
 }: {
   searchParams: Promise<{ status?: string; page?: string }>;
 }) {
   const sp = await searchParams;
   const status =
-    sp.status && APPLICATION_STATUSES.includes(sp.status as ApplicationStatus)
-      ? (sp.status as ApplicationStatus)
+    sp.status && INQUIRY_STATUSES.includes(sp.status as InquiryStatus)
+      ? (sp.status as InquiryStatus)
       : "all";
   const page = Math.max(1, parseInt(sp.page ?? "1", 10) || 1);
   const from = (page - 1) * PAGE_SIZE;
@@ -48,11 +41,10 @@ export default async function ApplicationsListPage({
 
   const supabase = createAdminClient();
   let q = supabase
-    .from("recruit_applications")
-    .select(
-      "id, created_at, name, phone, email, category, preferred_contact, status",
-      { count: "exact" },
-    )
+    .from("inquiries")
+    .select("id, created_at, name, email, phone, message, status", {
+      count: "exact",
+    })
     .order("created_at", { ascending: false })
     .range(from, to);
   if (status !== "all") q = q.eq("status", status);
@@ -60,11 +52,11 @@ export default async function ApplicationsListPage({
   const total = count ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  const filters: { value: "all" | ApplicationStatus; label: string }[] = [
+  const filters: { value: "all" | InquiryStatus; label: string }[] = [
     { value: "all", label: "전체" },
-    ...APPLICATION_STATUSES.map((s) => ({
+    ...INQUIRY_STATUSES.map((s) => ({
       value: s,
-      label: APPLICATION_STATUS_LABEL[s],
+      label: INQUIRY_STATUS_LABEL[s],
     })),
   ];
 
@@ -73,7 +65,7 @@ export default async function ApplicationsListPage({
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-[#0a0a0a]">
-            BJ 지원
+            문의
           </h1>
           <p className="mt-1 text-sm text-[#525252]">총 {total}건</p>
         </div>
@@ -83,8 +75,8 @@ export default async function ApplicationsListPage({
         {filters.map((f) => {
           const href =
             f.value === "all"
-              ? "/admin/applications"
-              : `/admin/applications?status=${f.value}`;
+              ? "/manage/inquiries"
+              : `/manage/inquiries?status=${f.value}`;
           const active = f.value === status;
           return (
             <Link
@@ -116,8 +108,7 @@ export default async function ApplicationsListPage({
                 <Th>제출일시</Th>
                 <Th>이름</Th>
                 <Th>연락처</Th>
-                <Th>부문</Th>
-                <Th>선호연락</Th>
+                <Th>메시지</Th>
                 <Th>상태</Th>
                 <Th className="text-right">액션</Th>
               </tr>
@@ -129,29 +120,30 @@ export default async function ApplicationsListPage({
                     {fmtDate(r.created_at)}
                   </Td>
                   <Td className="font-semibold text-[#0a0a0a]">{r.name}</Td>
-                  <Td className="tabular-nums text-[#525252]">{r.phone}</Td>
                   <Td className="text-[#525252]">
-                    {CATEGORY_LABEL[r.category] ?? r.category}
+                    {r.email ? (
+                      <span className="block">{r.email}</span>
+                    ) : null}
+                    {r.phone ? (
+                      <span className="block tabular-nums text-xs">
+                        {r.phone}
+                      </span>
+                    ) : null}
+                    {!r.email && !r.phone && "-"}
                   </Td>
-                  <Td className="text-[#525252]">
-                    {r.preferred_contact
-                      ? (CONTACT_LABEL[r.preferred_contact] ??
-                        r.preferred_contact)
-                      : "-"}
-                  </Td>
+                  <Td className="text-[#525252] max-w-md">{clip(r.message, 50)}</Td>
                   <Td>
                     <StatusBadge
                       status={r.status}
                       label={
-                        APPLICATION_STATUS_LABEL[
-                          r.status as ApplicationStatus
-                        ] ?? r.status
+                        INQUIRY_STATUS_LABEL[r.status as InquiryStatus] ??
+                        r.status
                       }
                     />
                   </Td>
                   <Td className="text-right">
                     <Link
-                      href={`/admin/applications/${r.id}`}
+                      href={`/manage/inquiries/${r.id}`}
                       className="text-xs font-semibold text-[#ff1493] hover:underline"
                     >
                       상세보기 →
@@ -162,10 +154,10 @@ export default async function ApplicationsListPage({
               {(!rows || rows.length === 0) && (
                 <tr>
                   <td
-                    colSpan={7}
+                    colSpan={6}
                     className="px-4 py-12 text-center text-sm text-[#888888]"
                   >
-                    해당 상태의 지원서가 없습니다.
+                    해당 상태의 문의가 없습니다.
                   </td>
                 </tr>
               )}
@@ -181,7 +173,7 @@ export default async function ApplicationsListPage({
             if (status !== "all") params.set("status", status);
             if (p !== 1) params.set("page", String(p));
             const qs = params.toString();
-            const href = qs ? `/admin/applications?${qs}` : "/admin/applications";
+            const href = qs ? `/manage/inquiries?${qs}` : "/manage/inquiries";
             const active = p === page;
             return (
               <Link

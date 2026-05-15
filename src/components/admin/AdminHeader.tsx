@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { signOut } from "@/app/admin/(dash)/actions";
+import { signOut } from "@/app/manage/(dash)/actions";
 
 const nav = [
-  { href: "/admin", label: "대시보드", exact: true },
-  { href: "/admin/applications", label: "BJ 지원" },
-  { href: "/admin/inquiries", label: "문의" },
+  { href: "/manage", label: "대시보드", exact: true },
+  { href: "/manage/applications", label: "BJ 지원" },
+  { href: "/manage/inquiries", label: "문의" },
+  { href: "/manage/creators", label: "크리에이터" },
 ];
 
 export default function AdminHeader() {
@@ -12,7 +13,7 @@ export default function AdminHeader() {
     <header className="sticky top-0 z-30 bg-white border-b border-[#ededed]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-6">
         <div className="flex items-center gap-8">
-          <Link href="/admin" className="text-sm font-black tracking-tight text-[#0a0a0a]">
+          <Link href="/manage" className="text-sm font-black tracking-tight text-[#0a0a0a]">
             <span className="bg-gradient-to-r from-[#ff1493] to-[#b347ff] bg-clip-text text-transparent">
               PS
             </span>{" "}

@@ -21,7 +21,7 @@ export async function updateInquiryStatus(formData: FormData) {
 
   if (error) throw new Error(error.message);
 
-  revalidatePath("/admin/inquiries");
-  revalidatePath(`/admin/inquiries/${id}`);
-  revalidatePath("/admin");
+  revalidatePath("/manage/inquiries");
+  revalidatePath(`/manage/inquiries/${id}`);
+  revalidatePath("/manage");
 }

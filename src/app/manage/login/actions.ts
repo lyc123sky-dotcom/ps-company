@@ -7,7 +7,7 @@ import { ADMIN_EMAIL } from "@/lib/admin/constants";
 export async function signIn(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  const redirectTo = String(formData.get("redirect") ?? "/admin");
+  const redirectTo = String(formData.get("redirect") ?? "/manage");
 
   if (!email || !password) {
     return { error: "이메일과 비밀번호를 입력해주세요." };
@@ -23,5 +23,5 @@ export async function signIn(formData: FormData) {
     return { error: "이메일 또는 비밀번호가 올바르지 않습니다." };
   }
 
-  redirect(redirectTo.startsWith("/admin") ? redirectTo : "/admin");
+  redirect(redirectTo.startsWith("/manage") ? redirectTo : "/manage");
 }

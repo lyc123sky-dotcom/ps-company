@@ -39,7 +39,7 @@ export default async function InquiryDetailPage({
     <div>
       <div className="mb-6">
         <Link
-          href="/admin/inquiries"
+          href="/manage/inquiries"
           className="text-xs text-[#525252] hover:text-[#0a0a0a]"
         >
           ← 전체 문의 목록

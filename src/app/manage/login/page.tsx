@@ -23,7 +23,7 @@ export default async function LoginPage({
           </div>
           <p className="mt-1 text-xs text-[#888888]">관리자 전용</p>
         </div>
-        <LoginForm redirectTo={sp.redirect ?? "/admin"} initialError={sp.error} />
+        <LoginForm redirectTo={sp.redirect ?? "/manage"} initialError={sp.error} />
       </div>
     </div>
   );
