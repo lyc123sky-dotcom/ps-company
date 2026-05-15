@@ -141,3 +141,15 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Next.js generated
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# misc
+.DS_Store
+*.pem
+.pnpm-debug.log*
+/build
