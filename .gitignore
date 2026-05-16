@@ -153,3 +153,6 @@ next-env.d.ts
 *.pem
 .pnpm-debug.log*
 /build
+
+# Claude Code runtime artifacts
+.claude/
