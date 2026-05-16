@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
+import StatsSection from "@/components/home/StatsSection";
 import ValuesSection from "@/components/home/ValuesSection";
+import CreatorsHomeSection from "@/components/home/CreatorsHomeSection";
 import IntroductionSection from "@/components/home/IntroductionSection";
 import StudioSection from "@/components/home/StudioSection";
 import CtaSection from "@/components/home/CtaSection";
@@ -38,7 +40,9 @@ export default function Home() {
     <>
       <HeroSection />
       <PlatformsSection />
+      <StatsSection />
       <ValuesSection />
+      <CreatorsHomeSection />
       <IntroductionSection />
       <StudioSection />
       <CtaSection />
