@@ -15,12 +15,21 @@ const navItems = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   // 라우트 변경 시 자동 닫힘
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // 스크롤 위치 → 헤더 shadow 강화
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // ESC + body scroll lock
   useEffect(() => {
@@ -39,7 +48,13 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-[#ededed]">
+      <header
+        className={`sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b transition-shadow duration-300 ${
+          scrolled
+            ? "border-[#ededed] shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+            : "border-[#ededed]"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link
             href="/"
@@ -71,7 +86,7 @@ export default function Header() {
               href="/recruit#apply"
               variant="primary"
               size="sm"
-              className="hidden md:inline-flex"
+              className="hidden md:inline-flex soft-pulse"
             >
               지원하기
             </LinkButton>

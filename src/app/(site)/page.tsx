@@ -3,9 +3,12 @@ import HeroSection from "@/components/home/HeroSection";
 import PlatformsSection from "@/components/home/PlatformsSection";
 import StatsSection from "@/components/home/StatsSection";
 import ValuesSection from "@/components/home/ValuesSection";
+import ProcessHomeSection from "@/components/home/ProcessHomeSection";
 import CreatorsHomeSection from "@/components/home/CreatorsHomeSection";
+import TestimonialSection from "@/components/home/TestimonialSection";
 import IntroductionSection from "@/components/home/IntroductionSection";
 import StudioSection from "@/components/home/StudioSection";
+import FaqSection from "@/components/home/FaqSection";
 import CtaSection from "@/components/home/CtaSection";
 
 export const metadata: Metadata = {
@@ -42,9 +45,12 @@ export default function Home() {
       <PlatformsSection />
       <StatsSection />
       <ValuesSection />
+      <ProcessHomeSection />
       <CreatorsHomeSection />
+      <TestimonialSection />
       <IntroductionSection />
       <StudioSection />
+      <FaqSection />
       <CtaSection />
     </>
   );

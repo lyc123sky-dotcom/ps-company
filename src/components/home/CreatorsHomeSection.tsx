@@ -17,10 +17,17 @@ const photos = [
 export default function CreatorsHomeSection() {
   return (
     <section
-      className="bg-white border-t border-[#ededed]"
+      className="relative bg-white border-t border-[#ededed] overflow-hidden"
       aria-label="활동 중인 크리에이터"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 left-1/3 w-[420px] h-[420px] rounded-full opacity-[0.1] blur-3xl"
+        style={{
+          background: "radial-gradient(circle, #ff1493 0%, transparent 70%)",
+        }}
+      />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
         <Reveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 sm:mb-12">
             <div>

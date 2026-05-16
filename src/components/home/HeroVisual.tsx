@@ -1,13 +1,20 @@
-// Placeholder visual — replace with finalized logo SVG when ready.
-// Keeps the same outer dimensions so HeroSection layout doesn't shift.
+// Hero 우측 시각 — PS 워드마크 중심 + 4개 플랫폼이 궤도 위에서 무한 회전.
+// CSS keyframes 기반, prefers-reduced-motion 환경에서는 자동 정지(globals.css 규칙).
+
+const platforms = [
+  { name: "YT", aria: "유튜브", color: "#ff0033" },
+  { name: "CZ", aria: "치지직", color: "#00dcff" },
+  { name: "SP", aria: "SOOP", color: "#b347ff" },
+  { name: "TT", aria: "틱톡", color: "#0a0a0a" },
+];
+
 export default function HeroVisual() {
   return (
-    <div className="relative w-full max-w-md mx-auto aspect-square">
-      <svg
-        viewBox="0 0 400 400"
-        className="w-full h-full"
-        aria-hidden="true"
-      >
+    <div
+      className="relative w-full max-w-md mx-auto aspect-square"
+      aria-hidden="true"
+    >
+      <svg viewBox="0 0 400 400" className="absolute inset-0 w-full h-full">
         <defs>
           <linearGradient id="ps-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#ff1493" />
@@ -27,7 +34,7 @@ export default function HeroVisual() {
           </filter>
         </defs>
 
-        {/* concentric circle outlines */}
+        {/* 동심원 */}
         <circle
           cx="200"
           cy="200"
@@ -39,41 +46,18 @@ export default function HeroVisual() {
         <circle
           cx="200"
           cy="200"
-          r="130"
+          r="148"
           fill="none"
           stroke="url(#ps-grad-soft)"
-          strokeWidth="1.5"
+          strokeWidth="1.25"
+          strokeDasharray="2 6"
         />
 
-        {/* decorative dots */}
-        <circle cx="80" cy="80" r="3" fill="#ff1493" />
-        <circle cx="330" cy="110" r="2" fill="#b347ff" />
-        <circle cx="350" cy="280" r="4" fill="#00dcff" />
-        <circle cx="60" cy="320" r="2.5" fill="#b347ff" />
+        {/* 장식 점 (정적) */}
         <circle cx="200" cy="40" r="2" fill="#ff1493" />
         <circle cx="200" cy="360" r="2" fill="#00dcff" />
 
-        {/* thin accent lines */}
-        <line
-          x1="0"
-          y1="200"
-          x2="60"
-          y2="200"
-          stroke="url(#ps-grad)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-        <line
-          x1="340"
-          y1="200"
-          x2="400"
-          y2="200"
-          stroke="url(#ps-grad)"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-
-        {/* PS wordmark */}
+        {/* PS 워드마크 */}
         <text
           x="200"
           y="200"
@@ -89,7 +73,7 @@ export default function HeroVisual() {
           PS
         </text>
 
-        {/* tiny label under wordmark */}
+        {/* 라벨 */}
         <text
           x="200"
           y="290"
@@ -103,6 +87,37 @@ export default function HeroVisual() {
           COMPANY
         </text>
       </svg>
+
+      {/* 궤도 위에서 회전하는 플랫폼 위성 */}
+      <div className="absolute inset-0 orbit-spin-32">
+        {platforms.map((p, i) => {
+          const angle = i * 90;
+          return (
+            <div
+              key={p.name}
+              className="absolute top-1/2 left-1/2"
+              style={{
+                transform: `rotate(${angle}deg) translate(0, -148px) rotate(-${angle}deg)`,
+                marginTop: -22,
+                marginLeft: -22,
+              }}
+            >
+              {/* 위성 자체는 부모 회전을 상쇄해서 항상 정자세 유지 */}
+              <div
+                className="orbit-spin-32-reverse w-11 h-11 rounded-full bg-white border flex items-center justify-center text-[11px] font-black tracking-tight shadow-[0_2px_8px_rgba(0,0,0,0.06)]"
+                style={{
+                  borderColor: p.color,
+                  color: p.color,
+                }}
+                role="img"
+                aria-label={p.aria}
+              >
+                {p.name}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
